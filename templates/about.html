@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
+
     <h2>{{ page_title }}</h2>
     <p>
         Among all legendary creatures, the dragons (derived from Greek δράκων or drákōn) have taken their unique place among
@@ -11,38 +12,44 @@
         you might not have known about.
     </p>
 
-    <div class="row featurette">
-        <div class="col-md-7">
-            <h3>Akhekh (from Egypt)</h3>
-            <p>
-                Also known as Akhekhu, the Akhekh is characterized as a fantastical beast with a long serpentine body that is
-                supported by its four legs. The mythical dragon was said to reside in remote corners of the Egyptian lands, mainly
-                around the fringe desert areas beside the fertile Nile valley. And interestingly enough, the tales of the Akhekh
-                drake might have inspired the legends of the Griffins in Europe. This gradual evolution of folkloric traditions can
-                be substantiated by the later depictions of the Akhekh – in which the creature maintains its serpentine profile with
-                the ancient Egyptian headgear (Uraei), albeit with an antelope’s body and a bird’s head.
-            </p>
-        </div>
-        <div class="col-md-5">
-            <img src="https://www.realmofhistory.com/wp-content/uploads/2018/03/10-mythical-dragon-entities-facts_1.jpg?ezimgfmt=ng:webp/ngcb20" alt="Akhekh (from Egypt)">
-        </div>
-    </div>
+    {% for member in company %}
 
-    <div class="row featurette">
-        <div class="col-md-5">
-            <img src="https://www.realmofhistory.com/wp-content/uploads/2018/03/10-mythical-dragon-entities-facts_1.jpg?ezimgfmt=ng:webp/ngcb20" alt="Akhekh (from Egypt)">
+        <div class="row featurette">
+
+            {% if loop.index % 2 != 0 %}
+
+                <div class="col-md-7">
+                    <h3>{{ loop.index }}. {{ member.name }}</h3>
+                    <p>
+                        {{ member.description }}
+                    </p>
+                </div>
+                <div class="col-md-5">
+                    <img src="{{ member.image_source }}" alt="Akhekh (from Egypt)" class="featurette-image image-responsive">
+                </div>
+
+            {% else %}
+            
+                <div class="col-md-5">
+                    <img src="{{ member.image_source }}" alt="Akhekh (from Egypt)" class="featurette-image image-responsive">
+                </div>
+                <div class="col-md-7">
+                    <h3>{{ loop.index }}. {{ member.name }}</h3>
+                    <p>
+                        {{ member.description }}
+                    </p>
+                </div>
+
+            {% endif %}
+
         </div>
-        <div class="col-md-7">
-            <h3>Drakon Kholkikos (from Kolkhis or Georgia)</h3>
-            <p>
-                If the legend of the ‘Jason and the Argonauts’ was an adventure game, the Drakon Kholkikos (or simply Colchian
-                Dragon) would have been the main boss who guarded the Golden Fleece – that was located in the sacred grove of Ares
-                at Kolkhis (present-day central Georgia). Described as having a crest, three tongues and a magical set of teeth,
-                there are different versions as to how the mythical dragon met its untimely death – with some concluding with the
-                ubiquitous scenario of the hero slaying the dragon, and some alluding to a situation where the witch Medea puts the
-                dragon to sleep with her magic. There is also a third version where the great singer Orpheus lures the dragon with
-                an enchanting musical rendition on his lyre.
-            </p>
-        </div>
-    </div>
+
+        {% if loop.index != compLen %}
+
+        <hr class="featurette-divider">
+
+        {% endif %}
+
+    {% endfor %}
+
 {% endblock %}
